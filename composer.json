@@ -1,0 +1,11 @@
+{
+    "name": "ilia/pico-crm",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ilia Ryazantsev",
+            "email": "ryazantsev.ie@gmail.com"
+        }
+    ],
+    "require": {}
+}
