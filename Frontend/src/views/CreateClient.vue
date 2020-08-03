@@ -5,7 +5,7 @@
     <v-form ref="form" v-model="valid">
       <v-text-field
         v-model="name"
-        :counter="10"
+        :counter="100"
         :rules="nameRules"
         label="Name"
         required
@@ -21,7 +21,7 @@
         :rules="phoneRules"
         label="Phone"
         placeholder="+7(XXX)XXX-XX-XX"
-        v-mask="'+#(###)###-##-##'"
+        v-mask="'+7(###)###-##-##'"
         required
       ></v-text-field>
       <v-btn
@@ -49,7 +49,7 @@ export default {
     name: '',
     nameRules: [
     v => !!v || 'Name is required',
-    v => (v && v.length <= 11) || 'Name must be less than 50 characters',
+    v => (v && v.length <= 100) || 'Name must be less than 100 characters',
     ],
     email: '',
     emailRules: [

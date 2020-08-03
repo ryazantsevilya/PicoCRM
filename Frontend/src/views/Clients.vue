@@ -16,6 +16,8 @@
         <v-text-field
           v-model="phone"
           label="Телефон"
+          placeholder="+7(XXX)XXX-XX-XX"
+          v-mask="'+7(###)###-##-##'"
         ></v-text-field>
         <v-btn
           color="success"
