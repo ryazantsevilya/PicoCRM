@@ -18,12 +18,14 @@ class ClientController extends BaseController{
 
     public function __construct(IClientRepository $clientRepository)
     {
-        parent::__construct();
         $this->clientRepository = $clientRepository;
     }
 
-    public function getClients(){
-        return $this->OkResponse($this->clientRepository->getClients());
+    public function getClients(ServerRequest $request){
+        $params = $request->getQueryParams();
+
+        $cleints = $this->clientRepository->getClients($params);
+        return $this->OkResponse($cleints);
     }
 
     public function createClient(ServerRequest $request){
@@ -40,12 +42,7 @@ class ClientController extends BaseController{
         $validation->validate();
 
         if ($validation->fails()) {
-
-            $coll = collect($validation->errors());
-
-            $messages = $coll->flatten();
-
-            return $this->Error($messages, 'Validation error');
+            return $this->BadRequest($validation->errors()->all(), 'Validation error');
         } else {
             $client = new Client();
             $client->email = $body['email'];
@@ -64,7 +61,7 @@ class ClientController extends BaseController{
         if ($result){
             return $this->OkResponse();
         } else {
-            return $this->Error([],'Client not found');
+            return $this->NotFound([], 'Client not found');
         }
     }
 }

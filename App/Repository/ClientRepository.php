@@ -18,10 +18,13 @@ class ClientRepository implements IClientRepository {
         $this->clientRepository = $entityManager->getRepository('App\Models\Client');
     }
 
-    public function getClients () : array 
+    public function getClients ($params = null) : array 
     {
-        $clients = $this->clientRepository->findAll();
-        return $clients;
+        if ($params){
+            return $this->clientRepository->findBy($params);
+        } else {
+            return $this->clientRepository->findAll();
+        }
     }
 
     public function createClient (Client $client)
